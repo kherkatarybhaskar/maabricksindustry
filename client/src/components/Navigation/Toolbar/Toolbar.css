@@ -1,0 +1,10 @@
+.Toolbar{
+    border: 2px solid rgb(131, 163, 13);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    color: rgb(131, 163, 13);
+    font-size: 20px;
+}
