@@ -10,7 +10,41 @@ const Sales = require('../../models/Sales');
 // @access Private
 router.get('/', auth, async (req, res) => {
     try {
-        const sales = await Sales.find({ user: req.user.id }).sort({ uploadtime: -1 });
+        const sales = await Sales.find({ user: req.user.id }).sort({ date: -1 });
+        // Working filter query
+        // let query = {$and : [
+        //     { user: req.user.id },
+        //     { typeofbrick: "grade1" },
+        //     { quantity: {$gt: 0 }},
+        // ]};
+        
+        // Testing for query to filter
+        // let query = {
+        //     typeofbrick: 'grade1',
+        //     drivername: '',
+        //     vehicletype: '',
+        //     vehicleno: '',
+        //     uploaddate: ''
+        // }
+        // if(query.typeofbrick==''){
+        //     delete query.typeofbrick
+        // }
+        // if(query.drivername==''){
+        //     delete query.drivername
+        // }
+        // if(query.vehicletype==''){
+        //     delete query.vehicletype
+        // }
+        // if(query.vehicleno==''){
+        //     delete query.vehicleno
+        // }
+        // if(query.uploaddate==''){
+        //     delete query.uploaddate
+        // }
+
+        // console.log(query);
+        // const sales = await Sales.find(query).sort({ date: -1});
+
         if(!sales){
             return res.status(400).json('No sales found');
         }
@@ -22,7 +56,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // @route   POST api/sales
-// @desc    Create of Update a user profile
+// @desc    Add a sale
 // @access  Private
 router.post('/', [auth, [
     check('typeofbrick', 'Type of brick is required').not().isEmpty(),
@@ -39,7 +73,9 @@ async (req, res) => {
         typeofbrick,
         drivername,
         vehicletype,
-        quantity
+        quantity,
+        vehicleno,
+        uploaddate
     } = req.body;
 
     let sales = new Sales({
@@ -47,6 +83,8 @@ async (req, res) => {
         drivername,
         vehicletype,
         quantity,
+        vehicleno,
+        uploaddate,
         user: req.user.id
     });
     await sales.save();
@@ -54,7 +92,7 @@ async (req, res) => {
 });
 
 // @route   UPDATE api/sales/update/:id
-// @desc    Delete a sale
+// @desc    Update a sale
 // @access  Private
 router.post('/update/:id', auth, async (req, res) => {
     try {
@@ -62,9 +100,16 @@ router.post('/update/:id', auth, async (req, res) => {
             typeofbrick,
             drivername,
             vehicletype,
-            quantity
+            quantity,
+            vehicleno,
+            uploaddate
         } = req.body;
-
+        // console.log(typeofbrick,
+        //     drivername,
+        //     vehicletype,
+        //     quantity,
+        //     vehicleno,
+        //     uploaddate)
         let sale = await Sales.findById(req.params.id);
 
         if(!sale){
@@ -82,7 +127,9 @@ router.post('/update/:id', auth, async (req, res) => {
                 typeofbrick,
                 drivername,
                 vehicletype,
-                quantity
+                quantity,
+                vehicleno,
+                uploaddate
             }
         );
 
@@ -122,6 +169,49 @@ router.delete('/:id', auth, async (req, res) => {
             return res.status(404).json({ msg: 'Sale not found'});
         }
         res.status(500).send('Server error');
+    }
+});
+
+// @route  GET api/sales/filter
+// @desc   Get all sales of a user with filter options
+// @access Private
+router.get('/filter', auth, async (req, res) => {
+    try {
+        const {
+            typeofbrick,
+            drivername,
+            vehicletype,
+            vehicleno,
+            uploaddate
+        } = req.query;
+        
+        let query = {
+            typeofbrick,
+            drivername,
+            vehicletype,
+            vehicleno,
+            uploaddate
+        }
+        if(query.typeofbrick==''){
+            delete query.typeofbrick
+        }
+        if(query.drivername==''){
+            delete query.drivername
+        }
+        if(query.vehicletype==''){
+            delete query.vehicletype
+        }
+        if(query.vehicleno==''){
+            delete query.vehicleno
+        }
+        if(query.uploaddate==''){
+            delete query.uploaddate
+        }
+        const sales = await Sales.find(query).sort({ date: -1});
+        res.json(sales);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
     }
 });
 module.exports = router;

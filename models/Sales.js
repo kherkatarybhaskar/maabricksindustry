@@ -21,7 +21,14 @@ const salesSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    uploadtime: {
+    vehicleno: {
+        type: String,
+        required: true
+    },
+    uploaddate: {
+        type: String
+    },
+    date: {
         type: Date,
         default: Date.now
     }

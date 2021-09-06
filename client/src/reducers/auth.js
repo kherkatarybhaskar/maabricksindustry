@@ -13,7 +13,11 @@ import {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
     loading: true,
-    user: null
+    user: {
+      "name": 'User',
+      "phone": '0000000000',
+      "usertype": "user"
+    }
   };
   
   function authReducer(state = initialState, action) {
@@ -42,7 +46,11 @@ import {
           token: null,
           isAuthenticated: false,
           loading: false,
-          user: null
+          user: {
+            "name": 'User',
+            "phone": '0000000000',
+            "usertype": "user"
+          }
         };
       default:
         return state;

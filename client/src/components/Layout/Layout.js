@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-
-import './Layout.css';
-import Aux from '../../utils/Aux';
+import classes from './Layout.css';
 import Toolbar from '../Navigation/Toolbar/Toolbar';
 import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 
-const Layout = props => {
+const Layout = (props) => {
     const [showSideDrawer, setShowSideDrawer] = useState(false);
     const SideDrawerToggleClickHandler = () => {
         setShowSideDrawer(!showSideDrawer);
     }
     return (
-        <Aux>
+        <div className={classes.Layout}>
             <Toolbar name={props.name} clicked={SideDrawerToggleClickHandler}/>
-            <SideDrawer show={showSideDrawer} clicked={SideDrawerToggleClickHandler}/>
-            {props.children}
+            <SideDrawer show={showSideDrawer} clicked={SideDrawerToggleClickHandler} />
+            <div className={classes.Main}>
+                {props.children}
+            </div>
             {/* This is layout page */}
-        </Aux>
+        </div>
     )
 }
 

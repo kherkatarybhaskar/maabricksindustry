@@ -35,12 +35,14 @@ async (req, res) => {
     }
     const {
         cookname,
-        quantitycooked
+        quantitycooked,
+        uploaddate
     } = req.body;
 
     let cook = new Cook({
         cookname,
         quantitycooked,
+        uploaddate,
         user: req.user.id
     });
     await cook.save();
@@ -54,7 +56,8 @@ router.post('/update/:id', auth, async (req, res) => {
     try {
         const { 
             cookname,
-            quantitycooked 
+            quantitycooked,
+            uploaddate
         } = req.body;
 
         let cook = await Cook.findById(req.params.id);
@@ -72,7 +75,8 @@ router.post('/update/:id', auth, async (req, res) => {
             { _id: req.params.id },
             {
                 cookname,
-                quantitycooked
+                quantitycooked,
+                uploaddate
             }
         );
 
@@ -112,6 +116,38 @@ router.delete('/:id', auth, async (req, res) => {
             return res.status(404).json({ msg: 'Cook not found'});
         }
         res.status(500).send('Server error');
+    }
+});
+
+// @route  GET api/cook/filter
+// @desc   Get all cook of a user with filter options
+// @access Private
+router.get('/filter', auth, async (req, res) => {
+    try {
+        const {
+            cookname,
+            quantitycooked,
+            uploaddate
+        } = req.query;
+        
+        let query = {
+            cookname,
+            uploaddate
+        }
+        if(query.cookname==''){
+            delete query.cookname
+        }
+        if(query.quantitycooked==''){
+            delete query.quantitycooked
+        }
+        if(query.uploaddate==''){
+            delete query.uploaddate
+        }
+        const cook = await Cook.find(query).sort({ date: -1});
+        res.json(cook);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
     }
 });
 module.exports = router;

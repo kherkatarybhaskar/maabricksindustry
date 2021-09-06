@@ -34,10 +34,12 @@ async (req, res) => {
     }
     const {
         carriername,
+        uploaddate
     } = req.body;
 
     let carrier = new Carrier({
         carriername,
+        uploaddate,
         user: req.user.id
     });
     await carrier.save();
@@ -49,7 +51,10 @@ async (req, res) => {
 // @access  Private
 router.post('/update/:id', auth, async (req, res) => {
     try {
-        const { carriername } = req.body;
+        const { 
+            carriername,
+            uploaddate 
+        } = req.body;
 
         let carrier = await Carrier.findById(req.params.id);
 
@@ -65,7 +70,8 @@ router.post('/update/:id', auth, async (req, res) => {
         carrier = await Carrier.updateOne(
             { _id: req.params.id },
             {
-                carriername
+                carriername,
+                uploaddate
             }
         );
 
@@ -105,6 +111,34 @@ router.delete('/:id', auth, async (req, res) => {
             return res.status(404).json({ msg: 'Carrier not found'});
         }
         res.status(500).send('Server error');
+    }
+});
+
+// @route  GET api/carrier/filter
+// @desc   Get all carrier of a user with filter options
+// @access Private
+router.get('/filter', auth, async (req, res) => {
+    try {
+        const {
+            carriername,
+            uploaddate
+        } = req.query;
+        
+        let query = {
+            carriername,
+            uploaddate
+        }
+        if(query.carriername==''){
+            delete query.carriername
+        }
+        if(query.uploaddate==''){
+            delete query.uploaddate
+        }
+        const carrier = await Carrier.find(query).sort({ date: -1});
+        res.json(carrier);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
     }
 });
 module.exports = router;

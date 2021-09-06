@@ -1,0 +1,33 @@
+.NavigationItem{
+    margin: 20px 0;
+    box-sizing: border-box;
+    display: block;
+    width: 80%;
+    /* border: 1px solid red; */
+    overflow: hidden;
+}
+
+.NavigationItem a{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    width: 100%;
+    box-sizing: border-box;
+    /* display: block; */
+}
+
+.NavigationItem a:hover,
+.NavigationItem a:active,
+.NavigationItem a:focus,
+.NavigationItem a.hover {
+   color: white;
+}
+
+.NavigationItem a:active,
+    .NavigationItem a.active {
+        color: rgb(131, 163, 13);
+        /* text-decoration: underline; */
+
+    }

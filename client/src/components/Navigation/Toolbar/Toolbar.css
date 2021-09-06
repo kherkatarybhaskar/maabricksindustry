@@ -1,10 +1,27 @@
 .Toolbar{
-    border: 2px solid rgb(131, 163, 13);
+    border: 2px solid rgb(122, 153, 11);
+    /* border: 5px solid blue; */
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 15px;
-    color: rgb(131, 163, 13);
-    font-size: 20px;
+    /* color: rgb(131, 163, 13); */
+    color: #F5F7D4;
+    background-color: rgb(131, 163, 13);
+    /* background-color: #F5F7D4; */
+
+    font-size: 16px;
+    position: fixed;
+    width: 95%;
+    /* margin-right: 10%; */
+    z-index: 10;
+    /* background-color: white; */
+    box-shadow: 0 -10px 20px 15px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+}
+
+@media(max-width: 799px){
+    .DesktopOnly{
+        display: none;
+    }
 }

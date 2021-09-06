@@ -1,11 +1,11 @@
 import React from 'react'
 
-import './Toolbar.css';
+import classes from './Toolbar.css';
 import Drawertoggle from './Drawertoggle/Drawertoggle';
 
 const Toolbar = props => {
     return (
-        <div class="Toolbar">
+        <div className={classes.Toolbar}>
             <Drawertoggle clicked={props.clicked}/>
             {props.name}
         </div>

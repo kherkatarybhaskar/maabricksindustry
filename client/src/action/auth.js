@@ -52,6 +52,7 @@ export const loadUser = () => async dispatch => {
 
 // Login User
 export const login = (phone, password) => async dispatch => {
+  // const body = { phone, password };
   const body = { phone, password };
 
   try {

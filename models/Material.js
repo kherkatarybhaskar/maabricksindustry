@@ -29,6 +29,9 @@ const materialSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    uploaddate: {
+        type: String
+    },
     uploadtime: {
         type: Date,
         default: Date.now

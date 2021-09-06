@@ -1,0 +1,9 @@
+.NavigationItems{
+    padding-top: 50px;
+    list-style: none;
+    display: flex;
+    flex-flow: column;
+    height: 100vh;
+    white-space: nowrap;
+    
+}

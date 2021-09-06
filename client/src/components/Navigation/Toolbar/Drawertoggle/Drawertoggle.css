@@ -16,12 +16,12 @@
     width: 90%;
     height: 4px;
     border-radius: 2px;
-    background-color: rgb(131, 163, 13);
-
+    /* background-color: #0A3409; */
+    background-color: #F5F7D4;
 }
 
-@media (min-width: 799px) {
+/* @media (min-width: 799px) {
     .DrawerToggle {
         display: none;
     }
-}
+} */

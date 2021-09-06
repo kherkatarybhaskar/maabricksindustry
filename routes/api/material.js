@@ -43,7 +43,8 @@ async (req, res) => {
         vehicletype,
         materialname,
         quantity,
-        sender
+        sender,
+        uploaddate
     } = req.body;
 
     let material = new Material({
@@ -53,6 +54,7 @@ async (req, res) => {
         materialname,
         quantity,
         sender,
+        uploaddate,
         user: req.user.id
     });
     await material.save();
@@ -70,7 +72,8 @@ router.post('/update/:id', auth, async (req, res) => {
             vehicletype,
             materialname,
             quantity,
-            sender
+            sender,
+            uploaddate
         } = req.body;
 
         let material = await Material.findById(req.params.id);
@@ -92,7 +95,8 @@ router.post('/update/:id', auth, async (req, res) => {
                 vehicletype,
                 materialname,
                 quantity,
-                sender
+                sender,
+                uploaddate
             }
         );
 
@@ -134,4 +138,57 @@ router.delete('/:id', auth, async (req, res) => {
         res.status(500).send('Server error');
     }
 });
+// @route  GET api/material/filter
+// @desc   Get all material of a user with filter options
+// @access Private
+router.get('/filter', auth, async (req, res) => {
+    try {
+        const {
+            vehicleplateno,
+            drivername,
+            vehicletype,
+            materialname,
+            quantity,
+            sender,
+            uploaddate
+        } = req.query;
+        
+        let query = {
+            vehicleplateno,
+            drivername,
+            vehicletype,
+            materialname,
+            quantity,
+            sender,
+            uploaddate
+        }
+        if(query.vehicleplateno==''){
+            delete query.vehicleplateno
+        }
+        if(query.drivername==''){
+            delete query.drivername
+        }
+        if(query.vehicletype==''){
+            delete query.vehicletype
+        }
+        if(query.materialname==''){
+            delete query.materialname
+        }
+        if(query.quantity==''){
+            delete query.quantity
+        }
+        if(query.sender==''){
+            delete query.sender
+        }
+        if(query.uploaddate==''){
+            delete query.uploaddate
+        }
+        const material = await Material.find(query).sort({ date: -1});
+        res.json(material);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 module.exports = router;

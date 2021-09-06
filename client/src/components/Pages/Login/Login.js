@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { login, logout } from '../../../action/auth';
-import './Login.css';
+import classes from './Login.css';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import LockIcon from '@material-ui/icons/Lock';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
@@ -22,7 +22,6 @@ const Login = ({ login, logout, isAuthenticated }) => {
     }
     const passwordInputChangedHandler = (event) => {
         setPassword(event.target.value);
-
     }
 
     const submitHandler = (event) => {
@@ -30,51 +29,49 @@ const Login = ({ login, logout, isAuthenticated }) => {
         login(phone, password);
         // console.log('Phone : ', phone);
     }
-    const logoutHandler = (event) => {
-        event.preventDefault();
-        // console.log('Logout Clicked');
-        logout();
-    }
+    // const logoutHandler = (event) => {
+    //     event.preventDefault();
+    // }
 
     return (
         <div>
-            <div class="LoginCard">
-                <form class="FormCard" onSubmit={submitHandler}>
+            <div className={classes.LoginCard}>
+                <form 
+                    className={classes.FormCard} 
+                    onSubmit={submitHandler}
+                >
                     <label>Phone Number</label>
-                    <div class="InputGroup">
-                        <AccountCircleIcon class="Icon"/>
+                    <div className={classes.InputGroup}>
+                        <AccountCircleIcon className={classes.Icon}/>
                         <input 
                             placeholder="Enter your phone number"
                             onChange={phoneInputChangedHandler}
-                            value={phone}></input>
+                            value={phone}
+                            className={classes.LoginInput}/>
                     </div>
                     <label>Password</label>
-                    <div class="InputGroup">
-                        <LockIcon class="Icon"/>
+                    <div className={classes.InputGroup}>
+                        <LockIcon className={classes.Icon}/>
                         {!show ?
                             <input 
                             placeholder="Enter your password"
                             onChange={passwordInputChangedHandler}
                             value={password}
-                            type="password"/>
+                            type="password"
+                            className={classes.LoginInput}/>
                             :
                             <input 
                             placeholder="Enter your password"
                             onChange={passwordInputChangedHandler}
-                            value={password}/>
-
+                            value={password}
+                            className={classes.LoginInput}/>
                         }
-                        <div class="Icon" onClick={visibilityShowHandler}>
+                        <div className={classes.Icon} onClick={visibilityShowHandler}>
                             {show ? <VisibilityIcon/> : <VisibilityOffIcon/>}
                         </div>   
                     </div>
-                    <div class="SubmitButtonGroup">
-                        <input class="SubmitButton" type="submit" value="Log In"/>
-
-                    </div>
-                    <div class="SubmitButtonGroup">
-                        <input class="SubmitButton" onClick={logoutHandler} value="Log Out"/>
-
+                    <div className={classes.SubmitButtonGroup}>
+                        <input className={classes.SubmitButton} type="submit" value="Log In"/>
                     </div>
                 </form>
             </div>

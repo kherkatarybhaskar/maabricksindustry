@@ -1,27 +1,23 @@
 import React from 'react';
 
-// import classes from './SideDrawer.css';
-import './SideDrawer.css';
+import classes from './SideDrawer.css';
 import Backdrop from './Backdrop/Backdrop';
 import Aux from '../../../utils/Aux';
+import NavigationItems from '../NavigationItems';
 
 const SideDrawer = props => {
 
-    let openClass = "SideDrawer Open";
-    let closedClass = "SideDrawer Close";
-
-    // let attachedClasses = [classes.Sidedrawer, classes.Open];
-    // if(props.open){
-    //     attachedClasses = [classes.Sidedrawer, classes.Open];
-    // }
+    let attachedClasses = [classes.SideDrawer, classes.Close];
+    if(props.show){
+        attachedClasses = [classes.SideDrawer, classes.Open];
+    }
     return (
         <Aux>
-            {/* <Backdrop show={props.show} clicked={props.clicked}/> */}
-            <div class={!props.open ? closedClass : openClass}>
-                I am SideDrawer
+            <Backdrop show={props.show} clicked={props.clicked}/>
+            <div className={attachedClasses.join(' ')}>
+                <NavigationItems clicked={props.clicked}/>
             </div>
         </Aux>
     )
 }
-
 export default SideDrawer;

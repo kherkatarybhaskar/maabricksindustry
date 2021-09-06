@@ -5,32 +5,57 @@
 }
 
 .FormCard{
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     width: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 30px;
     padding-bottom: 45px;
+    background-color: #E4F132;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 15px rgba(228, 241, 50, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
 }
 label{
     margin-top: 5px;
 }
 .InputGroup{
-    border-bottom: 1px solid black;
+    /* border-bottom: 1px solid black; */
     display: flex;
     flex-direction: row;
     align-items: center;
 }
-input{
+/* input{
     width: 90%;
     border: none;
     height: 30px;
     font-size: 16px;
+    background-color: #E4F132;
+    text-indent: 10px;
+
 }
 input:focus{
     outline: none;
+    background-color: #E4F132;
+    border-bottom: 1px solid black;
+
+} */
+.LoginInput{
+    width: 90%;
+    border: none;
+    height: 30px;
+    font-size: 16px;
+    background-color: #E4F132;
+    text-indent: 10px;
+
 }
+.LoginInput:focus{
+    outline: none;
+    background-color: #E4F132;
+    border-bottom: 1px solid black;
+
+}
+
 .Icon{
     height: 20px;
 }
@@ -44,9 +69,18 @@ input:focus{
     width: 50%;
     border-radius: 5px;
     background-color: bisque;
+    background-color: rgb(131, 163, 13);
+    border: 1px solid rgb(95, 119, 10);
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+
 }
-.SubmitButton:focus{
-    border: none;
-    color: bisque;
-    background-color: black;
+.SubmitButton:hover{
+    background-color: rgb(131, 163, 13);
+    border: 1px solid rgb(95, 119, 10);
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+}
+.SubmitButton:active{
+    background-color: rgb(131, 163, 13);
+    border: 1px solid rgb(95, 119, 10);
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
 }

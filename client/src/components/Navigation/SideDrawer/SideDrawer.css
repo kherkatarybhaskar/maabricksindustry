@@ -5,13 +5,14 @@
     width: 60%;
     height: 100%;
     background-color: rgb(131, 163, 13);
-    z-index: 10;
-    transition: transform 0.3s ease-out;
+    /* background-color: rgb(84, 99, 29); */
+    z-index: 11;
+    transition: transform 0.5s ease-out;
 }
 
 @media (min-width: 799px){
     .SideDrawer{
-        display: none;
+        width: 30%;
     }
 }
 

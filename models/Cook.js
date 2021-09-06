@@ -13,6 +13,9 @@ const cookSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    uploaddate: {
+        type: String
+    },
     uploadtime: {
         type: Date,
         default: Date.now
