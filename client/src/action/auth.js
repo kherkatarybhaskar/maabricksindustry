@@ -27,32 +27,8 @@ export const loadUser = () => async dispatch => {
   }
 };
 
-// Register User
-// export const register = formData => async dispatch => {
-//   try {
-//     const res = await api.post('/users', formData);
-
-//     dispatch({
-//       type: REGISTER_SUCCESS,
-//       payload: res.data
-//     });
-//     dispatch(loadUser());
-//   } catch (err) {
-//     const errors = err.response.data.errors;
-
-//     if (errors) {
-//       errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
-//     }
-
-//     dispatch({
-//       type: REGISTER_FAIL
-//     });
-//   }
-// };
-
 // Login User
 export const login = (phone, password) => async dispatch => {
-  // const body = { phone, password };
   const body = { phone, password };
 
   try {
@@ -65,7 +41,6 @@ export const login = (phone, password) => async dispatch => {
     localStorage.setItem('token', res.data.token)
     dispatch(loadUser());
   } catch (err) {
-    // const errors = err.response.data.errors;
     dispatch({
       type: LOGIN_FAIL
     });

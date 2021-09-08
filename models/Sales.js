@@ -9,6 +9,10 @@ const salesSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    factoryname: {
+        type: String,
+        required: true
+    },
     drivername: {
         type: String,
         required: true

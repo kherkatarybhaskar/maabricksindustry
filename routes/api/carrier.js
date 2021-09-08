@@ -34,11 +34,13 @@ async (req, res) => {
     }
     const {
         carriername,
+        numberoftrips,
         uploaddate
     } = req.body;
 
     let carrier = new Carrier({
         carriername,
+        numberoftrips,
         uploaddate,
         user: req.user.id
     });
@@ -53,6 +55,7 @@ router.post('/update/:id', auth, async (req, res) => {
     try {
         const { 
             carriername,
+            numberoftrips,
             uploaddate 
         } = req.body;
 
@@ -71,6 +74,7 @@ router.post('/update/:id', auth, async (req, res) => {
             { _id: req.params.id },
             {
                 carriername,
+                numberoftrips,
                 uploaddate
             }
         );
@@ -121,15 +125,20 @@ router.get('/filter', auth, async (req, res) => {
     try {
         const {
             carriername,
+            numberoftrips,
             uploaddate
         } = req.query;
         
         let query = {
             carriername,
+            numberoftrips,
             uploaddate
         }
         if(query.carriername==''){
             delete query.carriername
+        }
+        if(query.numberoftrips==''){
+            delete query.numberoftrips
         }
         if(query.uploaddate==''){
             delete query.uploaddate

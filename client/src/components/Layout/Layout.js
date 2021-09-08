@@ -17,7 +17,6 @@ const Layout = (props) => {
             <div className={classes.Main}>
                 {props.children}
             </div>
-            {/* This is layout page */}
         </div>
     )
 }

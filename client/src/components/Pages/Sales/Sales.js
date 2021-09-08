@@ -13,7 +13,8 @@ const Sales = ({ addSales, updateSales, loadSales, sales, filterSales, deleteSal
 
     // State for add sale
     const [state, setState] = useState({
-        typeofbrick: "grade1",
+        typeofbrick: "firstclass",
+        factoryname: "",
         drivername: "",
         vehicletype: "",
         quantity: "",
@@ -23,6 +24,7 @@ const Sales = ({ addSales, updateSales, loadSales, sales, filterSales, deleteSal
     // State for filtering
     const [filterState, setFilterState] = useState({
         typeofbrick: "",
+        factoryname: "",
         drivername: "",
         vehicletype: "",
         vehicleno: "",
@@ -62,7 +64,8 @@ const Sales = ({ addSales, updateSales, loadSales, sales, filterSales, deleteSal
         if(state.id){
             updateSales(state);
             setState({
-            typeofbrick: "grade1",
+            typeofbrick: "firstclass",
+            factoryname: "",
             drivername: "",
             vehicletype: "",
             quantity: "",
@@ -73,7 +76,8 @@ const Sales = ({ addSales, updateSales, loadSales, sales, filterSales, deleteSal
         else{
             addSales(state);
             setState({
-                typeofbrick: "grade1",
+                typeofbrick: "firstclass",
+                factoryname: "",
                 drivername: "",
                 vehicletype: "",
                 quantity: "",
@@ -85,7 +89,8 @@ const Sales = ({ addSales, updateSales, loadSales, sales, filterSales, deleteSal
 
     const resetClickHandler = () => {
         setState({
-            typeofbrick: "grade1",
+            typeofbrick: "firstclass",
+            factoryname: "",
             drivername: "",
             vehicletype: "",
             quantity: "",
@@ -111,15 +116,12 @@ const Sales = ({ addSales, updateSales, loadSales, sales, filterSales, deleteSal
         setFilterState({
             ...filterState,
             [event.target.name]: event.target.value,
-            // uploaddate: moment().format('ll')
         });
     }
     // Filter submit handler
     const filterSubmitHandler = (event) => {
         event.preventDefault();
-        // loadSales(filterState);
         filterSales(filterState);
-        console.log('Filter Clicked');
     }
 
     let salesTable = null;
@@ -129,6 +131,9 @@ const Sales = ({ addSales, updateSales, loadSales, sales, filterSales, deleteSal
             <div className={classes.TableRow}>
                     <div className={classes.TableColumn}>
                         <div>{sale.typeofbrick}</div>
+                    </div>
+                    <div className={classes.TableColumn}>
+                        <div>{sale.factoryname}</div>
                     </div>
                     <div className={classes.TableColumn}>
                         <div>{sale.drivername}</div>
@@ -179,6 +184,18 @@ const Sales = ({ addSales, updateSales, loadSales, sales, filterSales, deleteSal
                         </select>
                     </div>
                     <div className={classes.SalesDetails}>
+                        <div className={classes.SalesDetailsGroup}>
+                            <label>Factory Name :</label>
+                            <input 
+                                className={classes.SalesDetailsInfo}
+                                type='text' 
+                                placeholder='Factory Name'
+                                name="factoryname"
+                                onChange={inputChangeHandler}
+                                required
+                                value={state.factoryname}
+                            />
+                        </div>
                         <div className={classes.SalesDetailsGroup}>
                             <label>Driver Name :</label>
                             <input 
@@ -271,6 +288,16 @@ const Sales = ({ addSales, updateSales, loadSales, sales, filterSales, deleteSal
                     </select>
                 </div>
                 <div className={classes.FilterOption}>
+                    <lable className={classes.FilterOptionLabel}>Factory Name</lable>
+                    <input 
+                        placeholder='Factory Name' 
+                        type='text'
+                        onChange={filterInputChangeHandler}
+                        name='factoryname'
+                        value={filterState.factoryname}
+                        />
+                </div>
+                <div className={classes.FilterOption}>
                     <lable className={classes.FilterOptionLabel}>Driver Name</lable>
                     <input 
                         placeholder='Driver Name' 
@@ -319,6 +346,9 @@ const Sales = ({ addSales, updateSales, loadSales, sales, filterSales, deleteSal
                 <div className={classes.TableRowHeader}>
                     <div className={classes.TableColumnHeader}>
                         Brick Type
+                    </div>
+                    <div className={classes.TableColumnHeader}>
+                        Factory Name
                     </div>
                     <div className={classes.TableColumnHeader}>
                         Driver Name

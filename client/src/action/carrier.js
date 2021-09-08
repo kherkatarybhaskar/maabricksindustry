@@ -29,7 +29,6 @@ export const loadCarrier = () => async dispatch => {
 
 // Add Carrier
 export const addCarrier = formData => async dispatch => {
-    console.log('Add Carrier Called');
     try {
       await api.post('/carrier', formData);          
       const res = await api.get('/carrier');
@@ -46,7 +45,6 @@ export const addCarrier = formData => async dispatch => {
       });
   
     } catch (err) {
-        console.log(err.response.data.errors);
       dispatch({
         type: ADD_CARRIER_ERROR,
         payload: { msg: err.response.statusText, status: err.response.status }
@@ -67,7 +65,6 @@ export const updateCarrier = formData => async dispatch => {
                 id: key
             })
         }
-    //   console.log(carrier);
         dispatch({
             type: UPDATE_CARRIER_SUCCESS,
             payload: carrier
@@ -85,10 +82,10 @@ export const updateCarrier = formData => async dispatch => {
 // Filter Carrier
 export const filterCarrier = formData => async dispatch => {
   try {
-        console.log('Filter Carrier Called');
         const response = await api.get('/carrier/filter', {
            params: {
             carriername: formData.carriername,
+            numberoftrips: formData.numberoftrips,
             uploaddate: formData.uploaddate
            } });
         dispatch({

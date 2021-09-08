@@ -1,5 +1,6 @@
 const mongoose =  require('mongoose');
 
+// Cycle Party
 const carrierSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -7,6 +8,10 @@ const carrierSchema = new mongoose.Schema({
     },
     carriername: {
         type: String,
+        required: true
+    },
+    numberoftrips: {
+        type: Number,
         required: true
     },
     uploaddate: {

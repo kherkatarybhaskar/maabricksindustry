@@ -26,20 +26,6 @@ export const loadSales = () => async dispatch => {
       });
     }
 };
-// export const loadSales = () => async dispatch => {
-//     try {
-//       const res = await api.get('/sales');
-  
-//       dispatch({
-//         type: FETCH_SALES_SUCCESS,
-//         payload: res.data
-//       });
-//     } catch (err) {
-//       dispatch({
-//         type: FETCH_SALES_ERROR
-//       });
-//     }
-// };
 
 // Add Sale
 export const addSales = formData => async dispatch => {
@@ -99,10 +85,10 @@ export const updateSales = formData => async dispatch => {
 // Filter Sale
 export const filterSales = formData => async dispatch => {
   try {
-        console.log(formData);
         const response = await api.get('/sales/filter', {
            params: {
              typeofbrick: formData.typeofbrick,
+             factoryname: formData.factoryname,
              drivername: formData.drivername,
              vehicletype: formData.vehicletype,
              vehicleno: formData.vehicleno,

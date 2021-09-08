@@ -13,11 +13,13 @@ const Carrier = ({ carrier, addCarrier, updateCarrier, loadCarrier, filterCarrie
 
     const [state, setState] = useState({
         carriername: '',
+        numberoftrips: "",
         uploaddate: moment().format('ll')
     });
     // State for filtering
     const [filterState, setFilterState] = useState({
         carriername: '',
+        numberoftrips: "",
         uploaddate: ""
     });
 
@@ -26,7 +28,6 @@ const Carrier = ({ carrier, addCarrier, updateCarrier, loadCarrier, filterCarrie
     },[]);
 
     for(let key in carrier){
-        // console.log(sales[key]);
         tableState.push({
             ...carrier[key],
             id: carrier[key]._id
@@ -36,7 +37,6 @@ const Carrier = ({ carrier, addCarrier, updateCarrier, loadCarrier, filterCarrie
         setState({
             ...state,
             [event.target.name]: event.target.value,
-            // uploaddate: moment().format('ll')
         });
     }
 
@@ -50,6 +50,7 @@ const Carrier = ({ carrier, addCarrier, updateCarrier, loadCarrier, filterCarrie
             updateCarrier(state);
             setState({
                 carriername: '',
+                numberoftrips: "",
                 uploaddate: moment().format('ll')
             });
         }
@@ -57,6 +58,7 @@ const Carrier = ({ carrier, addCarrier, updateCarrier, loadCarrier, filterCarrie
             addCarrier(state);
             setState({
                 carriername: '',
+                numberoftrips: "",
                 uploaddate: moment().format('ll')
             });
         }
@@ -66,7 +68,6 @@ const Carrier = ({ carrier, addCarrier, updateCarrier, loadCarrier, filterCarrie
     const updateHandler = (event) => {
         setState({
             ...tableState[event.target.id],
-            // uploaddate: moment().format('ll')
         });
     }
     // Handles table delete button
@@ -89,7 +90,6 @@ const Carrier = ({ carrier, addCarrier, updateCarrier, loadCarrier, filterCarrie
     // Filter submit handler
     const filterSubmitHandler = (event) => {
         event.preventDefault();
-        console.log('Filter Clicked');
         filterCarrier(filterState);
     }
 
@@ -101,6 +101,9 @@ const Carrier = ({ carrier, addCarrier, updateCarrier, loadCarrier, filterCarrie
             <div className={classes.TableRow}>
                     <div className={classes.TableColumn}>
                         <div>{carrier.carriername}</div>
+                    </div>
+                    <div className={classes.TableColumn}>
+                        <div>{carrier.numberoftrips}</div>
                     </div>
                     <div className={classes.TableColumn}>
                         <div>{carrier.uploaddate}</div>
@@ -133,6 +136,18 @@ const Carrier = ({ carrier, addCarrier, updateCarrier, loadCarrier, filterCarrie
                                 onChange={inputChangeHandler}
                                 required
                                 value={state.carriername}
+                            />
+                        </div>
+                        <div className={classes.CarrierDetailsGroup}>
+                            <label>Number of Trips :</label>
+                            <input 
+                                className={classes.CarrierDetailsInfo}
+                                type='number' 
+                                // placeholder='Da'
+                                name="numberoftrips"
+                                onChange={inputChangeHandler}
+                                required
+                                value={state.numberoftrips}
                             />
                         </div>
                         <div className={classes.CarrierDetailsGroup}>
@@ -173,6 +188,16 @@ const Carrier = ({ carrier, addCarrier, updateCarrier, loadCarrier, filterCarrie
                         />
                 </div>
                 <div className={classes.FilterOption}>
+                    <lable className={classes.FilterOptionLabel}>Number of Trips</lable>
+                    <input 
+                        placeholder='Number of Trips' 
+                        type='text'
+                        onChange={filterInputChangeHandler}
+                        name='numberoftrips'
+                        value={filterState.numberoftrips}
+                        />
+                </div>
+                <div className={classes.FilterOption}>
                     <lable className={classes.FilterOptionLabel}>Upload Date</lable>
                     <input 
                         placeholder='Upload Date' 
@@ -191,6 +216,9 @@ const Carrier = ({ carrier, addCarrier, updateCarrier, loadCarrier, filterCarrie
                 <div className={classes.TableRowHeader}>
                     <div className={classes.TableColumnHeader}>
                         Cycle Party Name
+                    </div>
+                    <div className={classes.TableColumnHeader}>
+                        Number of Trips
                     </div>
                     <div className={classes.TableColumnHeader}>
                         Date

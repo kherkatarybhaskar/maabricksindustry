@@ -11,40 +11,7 @@ const Sales = require('../../models/Sales');
 router.get('/', auth, async (req, res) => {
     try {
         const sales = await Sales.find({ user: req.user.id }).sort({ date: -1 });
-        // Working filter query
-        // let query = {$and : [
-        //     { user: req.user.id },
-        //     { typeofbrick: "grade1" },
-        //     { quantity: {$gt: 0 }},
-        // ]};
-        
-        // Testing for query to filter
-        // let query = {
-        //     typeofbrick: 'grade1',
-        //     drivername: '',
-        //     vehicletype: '',
-        //     vehicleno: '',
-        //     uploaddate: ''
-        // }
-        // if(query.typeofbrick==''){
-        //     delete query.typeofbrick
-        // }
-        // if(query.drivername==''){
-        //     delete query.drivername
-        // }
-        // if(query.vehicletype==''){
-        //     delete query.vehicletype
-        // }
-        // if(query.vehicleno==''){
-        //     delete query.vehicleno
-        // }
-        // if(query.uploaddate==''){
-        //     delete query.uploaddate
-        // }
-
-        // console.log(query);
-        // const sales = await Sales.find(query).sort({ date: -1});
-
+       
         if(!sales){
             return res.status(400).json('No sales found');
         }
@@ -71,6 +38,7 @@ async (req, res) => {
     }
     const {
         typeofbrick,
+        factoryname,
         drivername,
         vehicletype,
         quantity,
@@ -80,6 +48,7 @@ async (req, res) => {
 
     let sales = new Sales({
         typeofbrick,
+        factoryname,
         drivername,
         vehicletype,
         quantity,
@@ -98,6 +67,7 @@ router.post('/update/:id', auth, async (req, res) => {
     try {
         const {
             typeofbrick,
+            factoryname,
             drivername,
             vehicletype,
             quantity,
@@ -125,6 +95,7 @@ router.post('/update/:id', auth, async (req, res) => {
             { _id: req.params.id },
             {
                 typeofbrick,
+                factoryname,
                 drivername,
                 vehicletype,
                 quantity,
@@ -179,6 +150,7 @@ router.get('/filter', auth, async (req, res) => {
     try {
         const {
             typeofbrick,
+            factoryname,
             drivername,
             vehicletype,
             vehicleno,
@@ -187,6 +159,7 @@ router.get('/filter', auth, async (req, res) => {
         
         let query = {
             typeofbrick,
+            factoryname,
             drivername,
             vehicletype,
             vehicleno,
@@ -194,6 +167,9 @@ router.get('/filter', auth, async (req, res) => {
         }
         if(query.typeofbrick==''){
             delete query.typeofbrick
+        }
+        if(query.factoryname==''){
+            delete query.factoryname
         }
         if(query.drivername==''){
             delete query.drivername
