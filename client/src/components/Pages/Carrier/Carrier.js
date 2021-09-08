@@ -143,7 +143,7 @@ const Carrier = ({ carrier, addCarrier, updateCarrier, loadCarrier, filterCarrie
                             <input 
                                 className={classes.CarrierDetailsInfo}
                                 type='number' 
-                                // placeholder='Da'
+                                placeholder='Number of Trips'
                                 name="numberoftrips"
                                 onChange={inputChangeHandler}
                                 required
