@@ -278,7 +278,7 @@ const Sales = ({ addSales, updateSales, loadSales, sales, filterSales, deleteSal
                             name='typeofbrick'
                             value={filterState.typeofbrick}
                         >
-                            <option value=""></option>
+                            <option value="">All</option>
                             <option value="firstclass">First Class</option>
                             <option value="secondclass">Second Class</option>
                             <option value="firstclassbroken">First Class Broken</option>
