@@ -15,7 +15,7 @@ import Cook from './components/Pages/Cook/Cook';
 import Aux from './utils/Aux';
 
 const  App = (props) => {
-
+  //Checking login status from local storage
   useEffect(() => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
